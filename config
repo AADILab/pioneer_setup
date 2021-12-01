@@ -1,0 +1,49 @@
+Host mercury
+User aadi
+Port 22
+HostName 192.168.2.101
+
+Host venus
+User aadi
+Port 22
+HostName 192.168.2.102
+
+Host earth
+User aadi
+Port 22
+HostName 192.168.2.103
+
+Host mars
+User aadi
+Port 22
+HostName 192.168.2.104
+
+Host jupiter
+User aadi
+Port 22
+HostName 192.168.2.105
+
+Host saturn
+User aadi
+Port 22
+HostName 192.168.2.106
+
+Host uranus
+User aadi
+Port 22
+HostName 192.168.2.107
+
+Host neptune
+User aadi
+Port 22
+HostName 192.168.2.108
+
+Host pluto
+User aadi
+Port 22
+HostName 192.168.2.109
+
+Host sol
+User aadi
+Port 22
+HostName 192.168.2.110
