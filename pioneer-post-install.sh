@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # pioneer-post-install.sh
 # Author: Connor Yates
-# Last edit: August 2017
 # This script is meant to be run on the acer laptops used in the AADI lab 
 # after a fresh install of Ubuntu Xenial 16.04. It downloads/installs ROS and the 
 # Pioneer control code. After that, it sets up necessary networking, ssh, etc... config files.
@@ -25,19 +24,19 @@ fi
 #    - redis-3.0.conf : First config file for redis server 3.0
 #    - redis-3.0.conf.local : Second config file for redis server 3.0
 #    - 99-usb-pioneer-hw.rules : udev rules for connecting the lidar and pioneer via USB
-mv hosts config redis-3.0.conf redis-3.0.conf.local 99-usb-pioneer-hw.rules /tmp/
+mv hosts config redis-3.0.conf redis-3.0.conf.local 99-usb-pioneer-hw.rules libaria_2.9.1+ubuntu16_amd64.deb /tmp/
 
 # Check that computer is up to date
 sudo apt-get update
 sudo apt-get upgrade --yes
 # NOTE: Check that "restricted", "universe", and "multiverse" are allowed repository sources (they are by default)
 
-# Install pleasentries, like vim and git
-sudo apt-get install vim git --yes
+# Install pleasentries
+sudo apt-get install wget curl vim git --yes
 
 # ROS Kinetic installation commands
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install ros-kinetic-desktop-full --yes
 sudo rosdep init
@@ -59,20 +58,19 @@ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
 # Install ARIA (dependency of rosaria)
-wget -P /tmp/ http://robots.mobilerobots.com/ARIA/download/current/libaria_2.9.1+ubuntu16_amd64.deb
 sudo dpkg -i /tmp/libaria_2.9.1+ubuntu16_amd64.deb
 
 # Setup Pioneer code
 cd ~/catkin_ws/src
-git clone https://github.com/amor-ros-pkg/rosaria.git
+git clone https://github.com/AADILab/rosaria.git
 git clone https://github.com/robopeak/rplidar_ros.git
-git clone https://github.com/JenJenChung/pioneer_2dnav.git
-git clone https://github.com/JenJenChung/nav_bundle.git
-git clone https://github.com/JenJenChung/simple_navigation_goals.git
-git clone https://github.com/JenJenChung/pioneer_test.git
-git clone https://github.com/JenJenChung/pioneer_description.git
-git clone https://github.com/JenJenChung/aadi_networking.git
-git clone https://github.com/JenJenChung/rocon_test_cases.git
+git clone https://github.com/AADILab/pioneer_2dnav.git
+git clone https://github.com/AADILab/nav_bundle.git
+git clone https://github.com/AADILab/simple_navigation_goals.git
+git clone https://github.com/AADILab/pioneer_test.git
+git clone https://github.com/AADILab/pioneer_description.git
+git clone https://github.com/AADILab/aadi_networking.git
+git clone https://github.com/AADILab/rocon_test_cases.git
 
 source ~/.bashrc
 cd ~/catkin_ws/
