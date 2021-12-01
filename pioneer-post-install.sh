@@ -21,10 +21,8 @@ fi
 # The files are:
 #    - hosts : networking config file /etc/hosts
 #    - config : ssh config file for host/username auto-completion
-#    - redis-3.0.conf : First config file for redis server 3.0
-#    - redis-3.0.conf.local : Second config file for redis server 3.0
 #    - 99-usb-pioneer-hw.rules : udev rules for connecting the lidar and pioneer via USB
-mv hosts config redis-3.0.conf redis-3.0.conf.local 99-usb-pioneer-hw.rules libaria_2.9.1+ubuntu16_amd64.deb /tmp/
+mv hosts config  99-usb-pioneer-hw.rules libaria_2.9.1+ubuntu16_amd64.deb /tmp/
 
 # Check that computer is up to date
 sudo apt-get update
@@ -46,7 +44,12 @@ source ~/.bashrc
 sudo apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential --yes
 
 # Install ROS packages needed to run pioneer code
-sudo apt-get install ros-kinetic-navigation ros-kinetic-gmapping ros-kinetic-ros-control ros-kinetic-ros-controllers ros-kinetic-rviz ros-kinetic-rocon* --yes 
+sudo apt-get install --yes \
+    ros-kinetic-navigation\
+    ros-kinetic-gmapping\
+    ros-kinetic-ros-control\
+    ros-kinetic-ros-controllers\
+    ros-kinetic-rviz
 
 # Set up catkin
 mkdir -p ~/catkin_ws/src
@@ -70,7 +73,6 @@ git clone https://github.com/AADILab/simple_navigation_goals.git
 git clone https://github.com/AADILab/pioneer_test.git
 git clone https://github.com/AADILab/pioneer_description.git
 git clone https://github.com/AADILab/aadi_networking.git
-git clone https://github.com/AADILab/rocon_test_cases.git
 
 source ~/.bashrc
 cd ~/catkin_ws/
@@ -86,10 +88,6 @@ sed '/'"$HOSTNAME"'/ s/^/#/' -i /tmp/hosts
 # Replace the first line with the host name
 sed 's/aadiX/'"$HOSTNAME"'/' -i /tmp/hosts
 sudo mv /tmp/hosts /etc/hosts
-
-# Patch rocon hub via the configuration files
-sudo mv /tmp/redis-3.0.conf /opt/ros/kinetic/share/rocon_hub/redis/redis-3.0.conf
-sudo mv /tmp/redis-3.0.conf.local /opt/ros/kinetic/share/rocon_hub/redis/redis-3.0.conf.local
 
 # Set up ssh
 sudo apt-get install openssh-server --yes
