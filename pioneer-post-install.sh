@@ -72,7 +72,7 @@ git clone https://github.com/AADILab/nav_bundle.git
 git clone https://github.com/AADILab/simple_navigation_goals.git
 git clone https://github.com/AADILab/pioneer_test.git
 git clone https://github.com/AADILab/pioneer_description.git
-git clone https://github.com/AADILab/aadi_networking.git
+# git clone https://github.com/AADILab/aadi_networking.git  # quick edit to remove this repo, not needed anymore
 
 source ~/.bashrc
 cd ~/catkin_ws/
