@@ -65,7 +65,7 @@ sudo dpkg -i /tmp/libaria_2.9.1+ubuntu16_amd64.deb
 
 # Setup Pioneer code
 cd ~/catkin_ws/src
-git clone https://github.com/AADILab/rosaria.git
+git clone -b kinetic https://github.com/AADILab/rosaria.git
 git clone https://github.com/robopeak/rplidar_ros.git
 git clone https://github.com/AADILab/pioneer_2dnav.git
 git clone https://github.com/AADILab/nav_bundle.git
